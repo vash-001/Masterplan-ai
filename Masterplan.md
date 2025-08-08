@@ -3,7 +3,7 @@ graph TD
     %% =================================================================
     %% Masterplan: Lifecycle of a Hierarchical Conscious AI Agent
     %% Design: Based on user concepts of awareness, exploration, and planning.
-    %% Version: 2.0 (Parser-Safe)
+    %% Version: 3.0 (Ultra-Safe Parser Edition)
     %% =================================================================
 
     %% -----------------------------------------------------------------
@@ -17,29 +17,29 @@ graph TD
         <div style='text-align:left; font-size:12px;'>
         - All neural networks initialized with random weights.<br/>
         - Experience Replay Buffers are empty.<br/>
-        - Zero prior knowledge of self or environment (Tabula Rasa).
+        - Zero prior knowledge of self or environment.
         </div>
         ")
 
         INIT_MODELS("
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>2. Define Neural Components</div>
         <div style='text-align:left; font-size:12px;'>
-        <b>a. The Self-Model (World / Dynamics Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- Network predicts the next state (s_next) from current state (s) and action (a).<br/>
+        <b>a. The Self-Model (Dynamics Model):</b><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Predicts the next state given the current state and an action.<br/>
         <b>b. The Environment-Model (Perception Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- Network predicts sensor inputs (ray-casts) from a given position and orientation.<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Predicts sensor inputs like ray-cast distances.<br/>
         <b>c. The Hierarchical Policy:</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Manager (High-Level Policy):</b> Selects abstract sub-goals.<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Experts (Low-Level Policies):</b> Specialized networks for each sub-goal.
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Manager:</b> Selects high-level sub-goals.<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Experts:</b> Specialized networks to execute sub-goals.
         </div>
         ")
 
         INIT_MEMORY("
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>3. Define Experience Replay Buffers</div>
         <div style='text-align:left; font-size:12px;'>
-        - <b>Physics Buffer:</b> Stores (state, action, reward, next_state) transitions.<br/>
-        - <b>Mapping Buffer:</b> Stores (location, sensor_readings) data.<br/>
-        - <b>Task Buffer:</b> Stores (state, goal, action, reward, next_state) trajectories.
+        - <b>Physics Buffer:</b> Stores state-action-reward-next_state transitions.<br/>
+        - <b>Mapping Buffer:</b> Stores location and sensor reading pairs.<br/>
+        - <b>Task Buffer:</b> Stores full, goal-oriented trajectories.
         </div>
         ")
         INIT_START --> INIT_MODELS --> INIT_MEMORY
@@ -55,7 +55,7 @@ graph TD
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>4. Start Self-Discovery Phase</div>
         <div style='text-align:left; font-size:12px;'>
         - Environment: Empty, infinite plane.<br/>
-        - Drive: Intrinsic Motivation only (Curiosity). No external goal.
+        - Drive: Curiosity only. No external goal.
         </div>
         ")
         
@@ -65,14 +65,14 @@ graph TD
 
         SELF_ACTION(Issue a random or curiosity-driven action)
         SELF_EXECUTE(Execute action in the physics engine)
-        SELF_OBSERVE(Observe the resulting state, s_next, and reward, r)
-        SELF_STORE(Store the transition in the Physics Buffer)
+        SELF_OBSERVE(Observe the resulting new state and reward)
+        SELF_STORE(Store the transition tuple in the Physics Buffer)
         SELF_TRAIN_PREPARE(Sample a mini-batch from the Physics Buffer)
         SELF_TRAIN_MODEL("
         <div style='font-weight:bold; font-size:12px;'>Train the Self-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - Predict s_predicted using the model.<br/>
-        - Calculate prediction error against s_actual.<br/>
+        - Predict the next state using the model.<br/>
+        - Calculate error between prediction and reality.<br/>
         - Update network weights via backpropagation.
         </div>
         ")
@@ -80,9 +80,9 @@ graph TD
         SELF_CURIOSITY("
         <div style='font-weight:bold; font-size:12px;'>6. Calculate Curiosity Reward</div>
         <div style='text-align:left; font-size:11px;'>
-        - Intrinsic Reward = Prediction Error.<br/>
+        - Intrinsic Reward equals the Prediction Error.<br/>
         - The more surprising the outcome, the higher the reward.<br/>
-        - This reward guides exploration towards poorly understood actions.
+        - This reward guides exploration towards the unknown.
         </div>
         ")
 
@@ -96,7 +96,7 @@ graph TD
         SELF_MODEL_COMPLETE(("
         <div style='font-weight:bold; font-size:14px;'>8. Self-Model Converged</div>
         <div style='text-align:left; font-size:12px;'>
-        The AI now has an intuitive understanding of its own physics. It knows it is a car.
+        The AI now has an intuitive understanding of its own physics.
         </div>
         "))
 
@@ -115,7 +115,7 @@ graph TD
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>9. Start Environment Exploration</div>
         <div style='text-align:left; font-size:12px;'>
         - Environment: The actual race track.<br/>
-        - Activate 'Sensor Rays' (the bat-like sense).
+        - Activate Sensor Rays for perception.
         </div>
         ")
         
@@ -123,15 +123,15 @@ graph TD
         <div style='font-weight:bold; font-size:12px;'>10. Map-Building Loop</div>
         ")
         
-        MAP_MOVE(Move through the track using the now-learned Self-Model)
+        MAP_MOVE(Move through the track using the Self-Model)
         MAP_SENSE(Fire sensor rays in all directions)
-        MAP_COLLECT(Collect data: [current_location, sensor_readings])
+        MAP_COLLECT(Collect data pair of current location and sensor readings)
         MAP_STORE(Store data in the Mapping Buffer)
         MAP_TRAIN_PREPARE(Sample a mini-batch from the Mapping Buffer)
         MAP_TRAIN_MODEL("
         <div style='font-weight:bold; font-size:12px;'>Train the Environment-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - The model learns to associate a location on the track with the shape of the boundaries around it.
+        - The model learns to map a location to the shape of its surroundings.
         </div>
         ")
 
@@ -142,7 +142,7 @@ graph TD
         MAP_MODEL_COMPLETE(("
         <div style='font-weight:bold; font-size:14px;'>12. Environment-Model Converged</div>
         <div style='text-align:left; font-size:12px;'>
-        The AI now has a 'mental map' of the track.
+        The AI now has a mental map of the track.
         </div>
         "))
 
@@ -164,44 +164,44 @@ graph TD
         PERCEIVE("
         <div style='font-weight:bold; font-size:14px;'>A. Perception</div>
         <div style='text-align:left; font-size:12px;'>
-        - Receive current state (s) from the game engine.<br/>
-        - Use Environment-Model to understand context ('I am approaching a sharp left turn').
+        - Receive current state from the game engine.<br/>
+        - Use Environment-Model to understand context, e.g., 'approaching a sharp left turn'.
         </div>
         ")
         
         PLAN_MANAGER("
-        <div style='font-weight:bold; font-size:14px;'>B. High-Level Planning (Manager)</div>
+        <div style='font-weight:bold; font-size:14px;'>B. High-Level Planning by Manager</div>
         <div style='text-align:left; font-size:12px;'>
         - Manager analyzes context and selects a high-level sub-goal.<br/>
-        - Example: 'Goal: Execute a perfect drift through the next corner'.<br/>
-        - Passes control to the appropriate Expert (e.g., the 'Drift Expert').
+        - Example: 'Goal is to execute a perfect drift'.<br/>
+        - Passes control to the appropriate Expert.
         </div>
         ")
 
         PLAN_EXPERT("
-        <div style='font-weight:bold; font-size:14px;'>C. Low-Level Planning (Expert)</div>
+        <div style='font-weight:bold; font-size:14px;'>C. Low-Level Planning by Expert</div>
         <div style='text-align:left; font-size:12px;'>
-        - The selected Expert performs 'Mental Simulation' (Imagination).<br/>
-        - It uses the Self-Model to rapidly 'imagine' hundreds of action sequences.<br/>
-        - It selects the best sequence of actions to achieve the Manager's sub-goal.
+        - The selected Expert performs Mental Simulation.<br/>
+        - It uses the Self-Model to rapidly imagine hundreds of action sequences.<br/>
+        - It selects the best sequence to achieve the Manager's sub-goal.
         </div>
         ")
 
         ACT("
         <div style='font-weight:bold; font-size:14px;'>D. Action</div>
         <div style='text-align:left; font-size:12px;'>
-        - Execute ONLY the first action from the imagined best-plan in the real game.
+        - Execute ONLY the first action from the best imagined plan in the real game.
         </div>
         ")
 
         LEARN_FEEDBACK("
-        <div style='font-weight:bold; font-size:14px;'>E. Learning & Feedback</div>
+        <div style='font-weight:bold; font-size:14px;'>E. Learning and Feedback</div>
         <div style='text-align:left; font-size:12px;'>
-        - Observe the real outcome (s_next) and reward (r).<br/>
+        - Observe the real outcome and reward.<br/>
         - Store the full experience in the Task Buffer.<br/>
-        - <b>Self-Model Update:</b> Compare real s_next with imagined s_next to refine its physics understanding.<br/>
-        - <b>Expert Update:</b> Use reward r to improve its ability to achieve its sub-goal.<br/>
-        - <b>Manager Update:</b> Use reward r to evaluate if choosing that sub-goal was a good decision.
+        - <b>Self-Model Update:</b> Compare real outcome with imagined outcome to refine physics model.<br/>
+        - <b>Expert Update:</b> Use reward to improve its skill at achieving its sub-goal.<br/>
+        - <b>Manager Update:</b> Use reward to learn which sub-goals are best in which situations.
         </div>
         ")
         
