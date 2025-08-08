@@ -3,7 +3,7 @@ graph TD
     %% =================================================================
     %% Masterplan: Lifecycle of a Hierarchical Conscious AI Agent
     %% Design: Based on user concepts of awareness, exploration, and planning.
-    %% Author: Collaborative effort between User and AI Assistant
+    %% Version: 2.0 (Parser-Safe)
     %% =================================================================
 
     %% -----------------------------------------------------------------
@@ -25,21 +25,21 @@ graph TD
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>2. Define Neural Components</div>
         <div style='text-align:left; font-size:12px;'>
         <b>a. The Self-Model (World / Dynamics Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- A network that predicts the next state (s') given the current state (s) and an action (a). Answers: 'What will happen to ME if I do this?'<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Network predicts the next state (s_next) from current state (s) and action (a).<br/>
         <b>b. The Environment-Model (Perception Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- A network that predicts sensor inputs (e.g., ray-cast distances) given a position and orientation. Answers: 'What should the world LOOK like from here?'<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Network predicts sensor inputs (ray-casts) from a given position and orientation.<br/>
         <b>c. The Hierarchical Policy:</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Manager (High-Level Policy):</b> Selects abstract sub-goals (e.g., 'Navigate next corner').<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Experts (Low-Level Policies):</b> Specialized networks to execute sub-goals (e.g., a 'Drift Expert', a 'Straight-line Acceleration Expert').
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Manager (High-Level Policy):</b> Selects abstract sub-goals.<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Experts (Low-Level Policies):</b> Specialized networks for each sub-goal.
         </div>
         ")
 
         INIT_MEMORY("
         <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>3. Define Experience Replay Buffers</div>
         <div style='text-align:left; font-size:12px;'>
-        - <b>Physics Buffer:</b> Stores transitions (s, a, r, s') to train the Self-Model.<br/>
-        - <b>Mapping Buffer:</b> Stores (location, sensor_readings) to train the Environment-Model.<br/>
-        - <b>Task Buffer:</b> Stores full trajectories (s, goal, a, r, s') to train the Hierarchical Policy.
+        - <b>Physics Buffer:</b> Stores (state, action, reward, next_state) transitions.<br/>
+        - <b>Mapping Buffer:</b> Stores (location, sensor_readings) data.<br/>
+        - <b>Task Buffer:</b> Stores (state, goal, action, reward, next_state) trajectories.
         </div>
         ")
         INIT_START --> INIT_MODELS --> INIT_MEMORY
@@ -47,7 +47,6 @@ graph TD
 
     %% -----------------------------------------------------------------
     %% Phase 1: Self-Discovery (Learning Physics via Intrinsic Motivation)
-    %% Environment: An empty, infinite plane to focus learning on the self.
     %% -----------------------------------------------------------------
     subgraph Phase1_Self_Discovery
         style Phase1_Self_Discovery fill:#f9f,stroke:#333,stroke-width:2px
@@ -66,14 +65,14 @@ graph TD
 
         SELF_ACTION(Issue a random or curiosity-driven action)
         SELF_EXECUTE(Execute action in the physics engine)
-        SELF_OBSERVE(Observe the resulting state s' and reward r)
-        SELF_STORE(Store the transition (s, a, r, s') in the Physics Buffer)
+        SELF_OBSERVE(Observe the resulting state, s_next, and reward, r)
+        SELF_STORE(Store the transition in the Physics Buffer)
         SELF_TRAIN_PREPARE(Sample a mini-batch from the Physics Buffer)
         SELF_TRAIN_MODEL("
         <div style='font-weight:bold; font-size:12px;'>Train the Self-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - Predict next state s'_pred using the model.<br/>
-        - Calculate prediction error: ||s'_real - s'_pred||.<br/>
+        - Predict s_predicted using the model.<br/>
+        - Calculate prediction error against s_actual.<br/>
         - Update network weights via backpropagation.
         </div>
         ")
@@ -83,7 +82,7 @@ graph TD
         <div style='text-align:left; font-size:11px;'>
         - Intrinsic Reward = Prediction Error.<br/>
         - The more surprising the outcome, the higher the reward.<br/>
-        - This reward guides exploration towards poorly understood actions (e.g., discovering drifting).
+        - This reward guides exploration towards poorly understood actions.
         </div>
         ")
 
@@ -97,7 +96,7 @@ graph TD
         SELF_MODEL_COMPLETE(("
         <div style='font-weight:bold; font-size:14px;'>8. Self-Model Converged</div>
         <div style='text-align:left; font-size:12px;'>
-        The AI now has an intuitive understanding of its own physics. It 'knows' it is a car.
+        The AI now has an intuitive understanding of its own physics. It knows it is a car.
         </div>
         "))
 
@@ -132,7 +131,7 @@ graph TD
         MAP_TRAIN_MODEL("
         <div style='font-weight:bold; font-size:12px;'>Train the Environment-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - The model learns to associate a location on the track with the shape of the walls and boundaries around it.
+        - The model learns to associate a location on the track with the shape of the boundaries around it.
         </div>
         ")
 
@@ -153,7 +152,7 @@ graph TD
     end
 
     %% -----------------------------------------------------------------
-    %% Phase 3: The Conscious Action Loop (Putting it all together)
+    %% Phase 3: The Conscious Action Loop (Perceive-Plan-Act-Learn Cycle)
     %% -----------------------------------------------------------------
     subgraph Phase3_Conscious_Action_Loop
         style Phase3_Conscious_Action_Loop fill:#9f9,stroke:#333,stroke-width:2px
@@ -175,7 +174,7 @@ graph TD
         <div style='text-align:left; font-size:12px;'>
         - Manager analyzes context and selects a high-level sub-goal.<br/>
         - Example: 'Goal: Execute a perfect drift through the next corner'.<br/>
-        - Passes control to the appropriate Expert (the 'Drift Expert').
+        - Passes control to the appropriate Expert (e.g., the 'Drift Expert').
         </div>
         ")
 
@@ -198,11 +197,11 @@ graph TD
         LEARN_FEEDBACK("
         <div style='font-weight:bold; font-size:14px;'>E. Learning & Feedback</div>
         <div style='text-align:left; font-size:12px;'>
-        - Observe the real outcome (s') and reward (r).<br/>
-        - Store the full experience (s, goal, a, r, s') in the Task Buffer.<br/>
-        - <b>Self-Model Update:</b> Compare real s' with imagined s' to refine its understanding of physics.<br/>
+        - Observe the real outcome (s_next) and reward (r).<br/>
+        - Store the full experience in the Task Buffer.<br/>
+        - <b>Self-Model Update:</b> Compare real s_next with imagined s_next to refine its physics understanding.<br/>
         - <b>Expert Update:</b> Use reward r to improve its ability to achieve its sub-goal.<br/>
-        - <b>Manager Update:</b> Use reward r to evaluate if choosing that sub-goal was a good decision in that context.
+        - <b>Manager Update:</b> Use reward r to evaluate if choosing that sub-goal was a good decision.
         </div>
         ")
         
