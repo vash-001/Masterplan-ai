@@ -1,205 +1,208 @@
 ```mermaid
 graph TD
     %% =================================================================
-    %% المخطط الرئيسي: دورة حياة وكيل ذكاء اصطناعي واعي هرمي
-    %% التصميم: مبني على أفكار المستخدم حول الوعي والاستكشاف والتخطيط
+    %% Masterplan: Lifecycle of a Hierarchical Conscious AI Agent
+    %% Design: Based on user concepts of awareness, exploration, and planning.
+    %% Author: Collaborative effort between User and AI Assistant
     %% =================================================================
 
     %% -----------------------------------------------------------------
-    %% المرحلة صفر: التهيئة والبنية الأساسية للنظام
+    %% Phase 0: System Initialization & Neural Architecture
     %% -----------------------------------------------------------------
-    subgraph المرحلة 0: تهيئة النظام والبنى العصبية
+    subgraph Phase0_System_Initialization
+        style Phase0_System_Initialization fill:#ddd,stroke:#333,stroke-width:2px
+
         INIT_START("
-        <div style='font-weight:bold; font-size:16px; margin-bottom:5px;'>1. بدء التشغيل</div>
+        <div style='font-weight:bold; font-size:16px; margin-bottom:5px;'>1. System Power-On</div>
         <div style='text-align:left; font-size:12px;'>
-        - تهيئة جميع الشبكات العصبية بأوزان عشوائية.<br/>
-        - تهيئة ذاكرة الخبرة (Replay Buffers) فارغة.<br/>
-        - لا يوجد أي معرفة مسبقة عن الذات أو البيئة.
+        - All neural networks initialized with random weights.<br/>
+        - Experience Replay Buffers are empty.<br/>
+        - Zero prior knowledge of self or environment (Tabula Rasa).
         </div>
         ")
 
         INIT_MODELS("
-        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>2. تعريف المكونات العصبية</div>
+        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>2. Define Neural Components</div>
         <div style='text-align:left; font-size:12px;'>
-        <b>أ. النموذج الذاتي (World Model / Dynamics Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- شبكة تتنبأ بالحالة التالية (s') بناءً على الحالة الحالية (s) والفعل (a).<br/>
-        <b>ب. النموذج البيئي (Environmental Model):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;- شبكة تتنبأ بمدخلات الحساسات (قراءات الأشعة) بناءً على الموقع والاتجاه.<br/>
-        <b>ج. السياسة الهرمية (Hierarchical Policy):</b><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- المدير (Manager / High-Level Policy):</b> يختار الأهداف الفرعية (Sub-goals).<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>- الخبراء (Experts / Low-Level Policies):</b> شبكات متخصصة لتنفيذ الأهداف الفرعية (مثل الانجراف، التسارع).
+        <b>a. The Self-Model (World / Dynamics Model):</b><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- A network that predicts the next state (s') given the current state (s) and an action (a). Answers: 'What will happen to ME if I do this?'<br/>
+        <b>b. The Environment-Model (Perception Model):</b><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;- A network that predicts sensor inputs (e.g., ray-cast distances) given a position and orientation. Answers: 'What should the world LOOK like from here?'<br/>
+        <b>c. The Hierarchical Policy:</b><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Manager (High-Level Policy):</b> Selects abstract sub-goals (e.g., 'Navigate next corner').<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>- The Experts (Low-Level Policies):</b> Specialized networks to execute sub-goals (e.g., a 'Drift Expert', a 'Straight-line Acceleration Expert').
         </div>
         ")
 
         INIT_MEMORY("
-        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>3. تعريف ذاكرة الخبرة</div>
+        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>3. Define Experience Replay Buffers</div>
         <div style='text-align:left; font-size:12px;'>
-        - <b>ذاكرة الفيزياء (Physics Buffer):</b> لتخزين تجارب (s, a, r, s') لتدريب النموذج الذاتي.<br/>
-        - <b>ذاكرة الخريطة (Mapping Buffer):</b> لتخزين (موقع، قراءات الحساسات) لتدريب النموذج البيئي.<br/>
-        - <b>ذاكرة المهمة (Task Buffer):</b> لتخزين تجارب كاملة لتدريب المدير والخبراء.
+        - <b>Physics Buffer:</b> Stores transitions (s, a, r, s') to train the Self-Model.<br/>
+        - <b>Mapping Buffer:</b> Stores (location, sensor_readings) to train the Environment-Model.<br/>
+        - <b>Task Buffer:</b> Stores full trajectories (s, goal, a, r, s') to train the Hierarchical Policy.
         </div>
         ")
         INIT_START --> INIT_MODELS --> INIT_MEMORY
     end
 
     %% -----------------------------------------------------------------
-    %% المرحلة الأولى: اكتشاف الذات (فهم فيزياء الحركة)
-    %% تتم في بيئة فارغة لتركيز التعلم على الذات فقط
+    %% Phase 1: Self-Discovery (Learning Physics via Intrinsic Motivation)
+    %% Environment: An empty, infinite plane to focus learning on the self.
     %% -----------------------------------------------------------------
-    subgraph المرحلة 1: اكتشاف الذات (مدفوع بالفضول)
-        style المرحلة 1 fill:#f9f,stroke:#333,stroke-width:2px
+    subgraph Phase1_Self_Discovery
+        style Phase1_Self_Discovery fill:#f9f,stroke:#333,stroke-width:2px
 
         SELF_START("
-        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>4. بدء مرحلة اكتشاف الذات</div>
+        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>4. Start Self-Discovery Phase</div>
         <div style='text-align:left; font-size:12px;'>
-        - البيئة: مساحة مفتوحة لا نهائية.<br/>
-        - الدافع: مكافأة الفضول فقط (لا يوجد هدف خارجي).
+        - Environment: Empty, infinite plane.<br/>
+        - Drive: Intrinsic Motivation only (Curiosity). No external goal.
         </div>
         ")
         
         SELF_LOOP_START("
-        <div style='font-weight:bold; font-size:12px;'>5. حلقة الاستكشاف الذاتي</div>
+        <div style='font-weight:bold; font-size:12px;'>5. Self-Exploration Loop</div>
         ")
 
-        SELF_ACTION(إصدار فعل عشوائي أو موجه بالفضول)
-        SELF_EXECUTE(تنفيذ الفعل في البيئة الافتراضية)
-        SELF_OBSERVE(ملاحظة الحالة الجديدة s' والمكافأة r)
-        SELF_STORE(تخزين التجربة (s, a, r, s') في ذاكرة الفيزياء)
-        SELF_TRAIN_PREPARE(سحب عينة عشوائية من ذاكرة الفيزياء)
+        SELF_ACTION(Issue a random or curiosity-driven action)
+        SELF_EXECUTE(Execute action in the physics engine)
+        SELF_OBSERVE(Observe the resulting state s' and reward r)
+        SELF_STORE(Store the transition (s, a, r, s') in the Physics Buffer)
+        SELF_TRAIN_PREPARE(Sample a mini-batch from the Physics Buffer)
         SELF_TRAIN_MODEL("
-        <div style='font-weight:bold; font-size:12px;'>تدريب النموذج الذاتي</div>
+        <div style='font-weight:bold; font-size:12px;'>Train the Self-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - التنبؤ بـ s' باستخدام النموذج.<br/>
-        - حساب الخطأ بين التنبؤ والواقع.<br/>
-        - تحديث أوزان الشبكة (Backpropagation).
+        - Predict next state s'_pred using the model.<br/>
+        - Calculate prediction error: ||s'_real - s'_pred||.<br/>
+        - Update network weights via backpropagation.
         </div>
         ")
         
         SELF_CURIOSITY("
-        <div style='font-weight:bold; font-size:12px;'>6. حساب مكافأة الفضول</div>
+        <div style='font-weight:bold; font-size:12px;'>6. Calculate Curiosity Reward</div>
         <div style='text-align:left; font-size:11px;'>
-        - المكافأة = مقدار خطأ التنبؤ.<br/>
-        - كلما كانت النتيجة مفاجئة، زادت المكافأة.<br/>
-        - هذه المكافأة تُستخدم لتوجيه الاستكشاف نحو الأفعال غير المفهومة.
+        - Intrinsic Reward = Prediction Error.<br/>
+        - The more surprising the outcome, the higher the reward.<br/>
+        - This reward guides exploration towards poorly understood actions (e.g., discovering drifting).
         </div>
         ")
 
         SELF_CHECK_CONVERGENCE{"
-        <div style='font-weight:bold; font-size:12px;'>7. هل النموذج الذاتي دقيق؟</div>
+        <div style='font-weight:bold; font-size:12px;'>7. Is the Self-Model Accurate?</div>
         <div style='text-align:left; font-size:11px;'>
-        (هل معدل خطأ التنبؤ منخفض؟)
+        (Is the average prediction error low?)
         </div>
         "}
 
         SELF_MODEL_COMPLETE(("
-        <div style='font-weight:bold; font-size:14px;'>8. اكتمال النموذج الذاتي</div>
+        <div style='font-weight:bold; font-size:14px;'>8. Self-Model Converged</div>
         <div style='text-align:left; font-size:12px;'>
-        الذكاء الاصطناعي الآن 'يفهم' كيف يتحرك.
+        The AI now has an intuitive understanding of its own physics. It 'knows' it is a car.
         </div>
         "))
 
         SELF_LOOP_START --> SELF_ACTION --> SELF_EXECUTE --> SELF_OBSERVE --> SELF_STORE --> SELF_TRAIN_PREPARE --> SELF_TRAIN_MODEL --> SELF_CURIOSITY --> SELF_CHECK_CONVERGENCE
-        SELF_CHECK_CONVERGENCE -- لا، استمر في الاستكشاف --> SELF_LOOP_START
-        SELF_CHECK_CONVERGENCE -- نعم، النموذج مستقر --> SELF_MODEL_COMPLETE
+        SELF_CHECK_CONVERGENCE -- "No, continue exploring" --> SELF_LOOP_START
+        SELF_CHECK_CONVERGENCE -- "Yes, model is stable" --> SELF_MODEL_COMPLETE
     end
 
     %% -----------------------------------------------------------------
-    %% المرحلة الثانية: اكتشاف البيئة (بناء الخريطة)
+    %% Phase 2: Environment Discovery (Building a Mental Map)
     %% -----------------------------------------------------------------
-    subgraph المرحلة 2: استكشاف البيئة ورسم الخرائط
-        style المرحلة 2 fill:#9cf,stroke:#333,stroke-width:2px
+    subgraph Phase2_Environment_Mapping
+        style Phase2_Environment_Mapping fill:#9cf,stroke:#333,stroke-width:2px
 
         MAP_START("
-        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>9. بدء استكشاف المسار</div>
+        <div style='font-weight:bold; font-size:14px; margin-bottom:5px;'>9. Start Environment Exploration</div>
         <div style='text-align:left; font-size:12px;'>
-        - البيئة: مسار السباق الفعلي.<br/>
-        - تفعيل 'أشعة الاستشعار' (حاسة الخفاش).
+        - Environment: The actual race track.<br/>
+        - Activate 'Sensor Rays' (the bat-like sense).
         </div>
         ")
         
         MAP_LOOP_START("
-        <div style='font-weight:bold; font-size:12px;'>10. حلقة بناء الخريطة</div>
+        <div style='font-weight:bold; font-size:12px;'>10. Map-Building Loop</div>
         ")
         
-        MAP_MOVE(التحرك في المسار باستخدام النموذج الذاتي)
-        MAP_SENSE(إطلاق أشعة الاستشعار في كل الاتجاهات)
-        MAP_COLLECT(جمع البيانات: الموقع الحالي + قراءات الأشعة)
-        MAP_STORE(تخزين البيانات في ذاكرة الخريطة)
-        MAP_TRAIN_PREPARE(سحب عينة من ذاكرة الخريطة)
+        MAP_MOVE(Move through the track using the now-learned Self-Model)
+        MAP_SENSE(Fire sensor rays in all directions)
+        MAP_COLLECT(Collect data: [current_location, sensor_readings])
+        MAP_STORE(Store data in the Mapping Buffer)
+        MAP_TRAIN_PREPARE(Sample a mini-batch from the Mapping Buffer)
         MAP_TRAIN_MODEL("
-        <div style='font-weight:bold; font-size:12px;'>تدريب النموذج البيئي</div>
+        <div style='font-weight:bold; font-size:12px;'>Train the Environment-Model</div>
         <div style='text-align:left; font-size:11px;'>
-        - يتعلم النموذج ربط كل موقع في الخريطة بشكل الجدران والحدود من حوله.
+        - The model learns to associate a location on the track with the shape of the walls and boundaries around it.
         </div>
         ")
 
         MAP_CHECK_COVERAGE{"
-        <div style='font-weight:bold; font-size:12px;'>11. هل تم استكشاف كافٍ؟</div>
+        <div style='font-weight:bold; font-size:12px;'>11. Sufficient Coverage?</div>
         "}
         
         MAP_MODEL_COMPLETE(("
-        <div style='font-weight:bold; font-size:14px;'>12. اكتمال النموذج البيئي</div>
+        <div style='font-weight:bold; font-size:14px;'>12. Environment-Model Converged</div>
         <div style='text-align:left; font-size:12px;'>
-        الذكاء الاصطناعي الآن لديه 'خريطة ذهنية' للمسار.
+        The AI now has a 'mental map' of the track.
         </div>
         "))
 
         MAP_LOOP_START --> MAP_MOVE --> MAP_SENSE --> MAP_COLLECT --> MAP_STORE --> MAP_TRAIN_PREPARE --> MAP_TRAIN_MODEL --> MAP_CHECK_COVERAGE
-        MAP_CHECK_COVERAGE -- لا، استمر في الاستكشاف --> MAP_LOOP_START
-        MAP_CHECK_COVERAGE -- نعم، الخريطة مفصلة --> MAP_MODEL_COMPLETE
+        MAP_CHECK_COVERAGE -- "No, explore more" --> MAP_LOOP_START
+        MAP_CHECK_COVERAGE -- "Yes, map is detailed" --> MAP_MODEL_COMPLETE
     end
 
     %% -----------------------------------------------------------------
-    %% المرحلة الثالثة: التخطيط الواعي والتنفيذ (السباق الحقيقي)
+    %% Phase 3: The Conscious Action Loop (Putting it all together)
     %% -----------------------------------------------------------------
-    subgraph "المرحلة 3: دورة العمل الواعي (Perceive-Plan-Act-Learn)"
-        style "المرحلة 3" fill:#9f9,stroke:#333,stroke-width:2px
+    subgraph Phase3_Conscious_Action_Loop
+        style Phase3_Conscious_Action_Loop fill:#9f9,stroke:#333,stroke-width:2px
 
         MAIN_LOOP("
-        <div style='font-weight:bold; font-size:16px;'>13. بدء حلقة السباق الواعي</div>
+        <div style='font-weight:bold; font-size:16px;'>13. Start Conscious Racing Loop</div>
         ")
 
         PERCEIVE("
-        <div style='font-weight:bold; font-size:14px;'>أ. الإدراك (Perception)</div>
+        <div style='font-weight:bold; font-size:14px;'>A. Perception</div>
         <div style='text-align:left; font-size:12px;'>
-        - تلقي الحالة الحالية (s) من اللعبة.<br/>
-        - استخدام النموذج البيئي لفهم السياق (أنا على وشك دخول منعطف).
+        - Receive current state (s) from the game engine.<br/>
+        - Use Environment-Model to understand context ('I am approaching a sharp left turn').
         </div>
         ")
         
         PLAN_MANAGER("
-        <div style='font-weight:bold; font-size:14px;'>ب. التخطيط عالي المستوى (المدير)</div>
+        <div style='font-weight:bold; font-size:14px;'>B. High-Level Planning (Manager)</div>
         <div style='text-align:left; font-size:12px;'>
-        - المدير يحلل الموقف ويختار هدفًا فرعيًا (sub-goal).<br/>
-        - مثال: 'الهدف الآن هو اجتياز المنعطف القادم بأسرع طريقة ممكنة'.<br/>
-        - يسلم التحكم إلى الخبير المناسب (خبير الانجراف).
+        - Manager analyzes context and selects a high-level sub-goal.<br/>
+        - Example: 'Goal: Execute a perfect drift through the next corner'.<br/>
+        - Passes control to the appropriate Expert (the 'Drift Expert').
         </div>
         ")
 
         PLAN_EXPERT("
-        <div style='font-weight:bold; font-size:14px;'>ج. التخطيط منخفض المستوى (الخبير)</div>
+        <div style='font-weight:bold; font-size:14px;'>C. Low-Level Planning (Expert)</div>
         <div style='text-align:left; font-size:12px;'>
-        - الخبير المتخصص يقوم بـ 'المحاكاة الذهنية'.<br/>
-        - يستخدم النموذج الذاتي لتجربة مئات سلاسل الأفعال بسرعة في 'خياله'.<br/>
-        - يختار أفضل سلسلة حركات لتحقيق الهدف الفرعي الذي أعطاه المدير.
+        - The selected Expert performs 'Mental Simulation' (Imagination).<br/>
+        - It uses the Self-Model to rapidly 'imagine' hundreds of action sequences.<br/>
+        - It selects the best sequence of actions to achieve the Manager's sub-goal.
         </div>
         ")
 
         ACT("
-        <div style='font-weight:bold; font-size:14px;'>د. التنفيذ (Action)</div>
+        <div style='font-weight:bold; font-size:14px;'>D. Action</div>
         <div style='text-align:left; font-size:12px;'>
-        - تنفيذ الفعل الأول فقط من الخطة التي تم تخيلها في اللعبة الحقيقية.
+        - Execute ONLY the first action from the imagined best-plan in the real game.
         </div>
         ")
 
         LEARN_FEEDBACK("
-        <div style='font-weight:bold; font-size:14px;'>هـ. التعلم (Learning & Feedback)</div>
+        <div style='font-weight:bold; font-size:14px;'>E. Learning & Feedback</div>
         <div style='text-align:left; font-size:12px;'>
-        - ملاحظة النتيجة الحقيقية (s') والمكافأة (r).<br/>
-        - تخزين التجربة الكاملة (s, goal, a, r, s') في ذاكرة المهمة.<br/>
-        - <b>تحديث النموذج الذاتي:</b> مقارنة s' الحقيقية مع s' المتوقعة لتصحيح فهمه للفيزياء.<br/>
-        - <b>تحديث الخبير:</b> استخدام المكافأة r لتحسين قدرته على تحقيق الأهداف الفرعية.<br/>
-        - <b>تحديث المدير:</b> استخدام المكافأة r لتقييم ما إذا كان اختيار هذا الهدف الفرعي قرارًا جيدًا.
+        - Observe the real outcome (s') and reward (r).<br/>
+        - Store the full experience (s, goal, a, r, s') in the Task Buffer.<br/>
+        - <b>Self-Model Update:</b> Compare real s' with imagined s' to refine its understanding of physics.<br/>
+        - <b>Expert Update:</b> Use reward r to improve its ability to achieve its sub-goal.<br/>
+        - <b>Manager Update:</b> Use reward r to evaluate if choosing that sub-goal was a good decision in that context.
         </div>
         ")
         
@@ -207,7 +210,7 @@ graph TD
     end
 
     %% -----------------------------------------------------------------
-    %% ربط المراحل ببعضها البعض
+    %% Linking the High-Level Phases Together
     %% -----------------------------------------------------------------
     INIT_MEMORY --> SELF_START
     SELF_MODEL_COMPLETE --> MAP_START
